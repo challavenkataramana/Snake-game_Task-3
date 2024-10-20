@@ -42,7 +42,7 @@ canvas.addEventListener('touchend', function(event) {
     const ey = touch.clientY;
 
     const difx = ex - sx;
-    const difyY = ey - sy;
+    const dify = ey - sy;
 
     if (Math.abs(difx) > Math.abs(dify)) { 
         if (difx > 0 && direction.x === 0) {
