@@ -30,8 +30,8 @@ canvas.addEventListener('touchstart', function(event) {
     const touch = event.touches[0];
     sx = touch.clientX;
     sy = touch.clientY;
-    event.preventDefault();
 });
+
 canvas.addEventListener('touchmove', function(event) {
     event.preventDefault();
 });
@@ -43,6 +43,8 @@ canvas.addEventListener('touchend', function(event) {
 
     const difx = ex - sx;
     const dify = ey - sy;
+
+    console.log(`Touch End: ex=${ex}, ey=${ey}, difx=${difx}, dify=${dify}`); // Debugging
 
     if (Math.abs(difx) > Math.abs(dify)) { 
         if (difx > 0 && direction.x === 0) {
