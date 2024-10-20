@@ -24,32 +24,36 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-let startX, startY;
+let sx, sy;
 
 canvas.addEventListener('touchstart', function(event) {
     const touch = event.touches[0];
-    startX = touch.clientX;
-    startY = touch.clientY;
+    sx = touch.clientX;
+    sy = touch.clientY;
+    event.preventDefault();
+});
+canvas.addEventListener('touchmove', function(event) {
+    event.preventDefault();
 });
 
 canvas.addEventListener('touchend', function(event) {
     const touch = event.changedTouches[0];
-    const endX = touch.clientX;
-    const endY = touch.clientY;
+    const ex = touch.clientX;
+    const ey = touch.clientY;
 
-    const diffX = endX - startX;
-    const diffY = endY - startY;
+    const difx = ex - sx;
+    const difyY = ey - sy;
 
-    if (Math.abs(diffX) > Math.abs(diffY)) { 
-        if (diffX > 0 && direction.x === 0) {
+    if (Math.abs(difx) > Math.abs(dify)) { 
+        if (difx > 0 && direction.x === 0) {
             direction = { x: gridSize, y: 0 }; 
-        } else if (diffX < 0 && direction.x === 0) {
+        } else if (difx < 0 && direction.x === 0) {
             direction = { x: -gridSize, y: 0 };
         }
     } else { 
-        if (diffY > 0 && direction.y === 0) {
+        if (dify > 0 && direction.y === 0) {
             direction = { x: 0, y: gridSize }; 
-        } else if (diffY < 0 && direction.y === 0) {
+        } else if (dify < 0 && direction.y === 0) {
             direction = { x: 0, y: -gridSize };
         }
     }
@@ -119,3 +123,10 @@ function generateFood() {
     }
     return newFood;
 }
+
+document.addEventListener("keydown", function (event) 
+{
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+        event.preventDefault();
+    }
+});
